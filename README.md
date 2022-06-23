@@ -1,176 +1,49 @@
-# Automatisation Legacy
+#   Prerequis
 
-Projet d'automatisation des tests fonctionnels effectués sur Legacy
+#       Node version >=12
 
-## Prerequis
-
-### Node version >=12
-
-Une version stable est disponible [ici](https://nodejs.org/dist/latest-v12.x/)
+Une version stable est disponible https://nodejs.org/dist/latest-v12.x/
 Pour installer nodeJS sans droits d'admin : https://theshravan.net/blog/how-to-use-node-and-npm-without-installation-or-admin-rights/
 
- ### Python >=v3
-  > Pour installer Python sans droits d'admin : https://zwbetz.com/install-python-on-windows-without-admin-access/
+#       Python >=v3
+
+Pour installer Python sans droits d'admin : https://zwbetz.com/install-python-on-windows-without-admin-access/
+
+#   Comment fonctionne le projet
+
+- Les features correspondent aux actions que vous voulez tester, par exemple la connection d'un utilisateur.
+- A chaque etape d'une feature est appelle la step qui correspond.
+- La step appelle alors la fonction qui lui est lie.
+- La fonction est ensuite lancee et si elle se passe sans probleme on peut passer a l'etape suivante de la feature.
+- Si tout les points de la feature sont executes sans probleme, alors la feature est valide, sinon l'execution du test s'arrete des la premiere erreur.
+- Le fait de fonctionner avec cette architecture la a beaucoup d'avantages (simple a comprendre, fonctions facilement reutilisable et adaptable...)
+- Possibilite de generer un rapport a la fin (explique plus bas)
 
 
-## Installation du projet
-
-1. Désactiver les verifications SSL : 
-`export GIT_SSL_NO_VERIFY=true`
-
-`git config http.sslVerify false`
-
-2. Récupérer le projet [ici](https://gitlab.udd.net.intra.laposte.fr/lpel/rrb-recette/webdriverio-legacy) ou cloner le repo
-`git clone https://gitlab.udd.net.intra.laposte.fr/lpel/rrb-recette/webdriverio-legacy.git`
-
-3. Ouvrir le projet avec Visual Studio (ou autre IDE)
-
-4. Installer les dépendances (`npm install`)
->/!\ Ne pas se connecter avec Pulse ou tout autre réseau La Poste pour ne pas être bloqué par le proxy
+#   Comment lancer les tests
 
 ```nodejs
-git clone https://gitlab.udd.net.intra.laposte.fr/lpel/rrb-recette/webdriverio-legacy.git
-npm install
-```
-    
-## Execution des tests en local
+$ npm run wdio:Desktop
+``` 
 
-1. Configurer le fichier de configuration (_wdio.conf.js_)
-Les valeurs a modifier sont principalement :
-- specs 
-_Definition du ou des dossiers a prendre en compte pour l'execution._
-- capabilities - browserName
-_Definition du navigateur a utiliser_
-- capabilities - maxInstances 
-_Definition du nombre d'instances de navigateur a ouvrir en parrallele_
-- capabilities - --headless 
-_Definition du mode headless ou non_
-- baseUrl
-_Defintion de la plateforme sur laquelle lancer les tests_
--tagExpression
-_Definition des tags a executer ou exclure_
-
-_Chaque valeur importante est documentée dans le fichier de configuration._
-
-2. Exéxuter la commande dans le terminal
+Cette commande permet d'ajouter des parametres utiles, tels que la suite a executer :
 
 ```nodejs
-$ npm run wdio
+$ npx wdio:Desktop --suite complet
 ```
 
-OU
+#   Generation du rapport d'execution
 
-```nodejs
-$ npx wdio run wdio.conf.js
-```
-Cette commande permet d'ajouter des paramètres utiles, tels que la suite à exécuter :
+Pour chaque feature executee, un fichier .json est genere automatiquement, contenant toutes les informations utiles telles que le resultat, le temps d'execution, le screenshot de l'erreur,...
 
-```nodejs
-$ npx wdio run wdio.conf.js --suite complet
-```
-
-## Génération du rapport d'exécution
-
-Pour chaque feature exécutée, un fichier .json est généré automatiquement, contenant toutes les informations utiles telles que le résultat, le temps d'exécution, le screenshot de l'erreur etc.
-
-Deux commandes sont utilisées concernant le rapport d'exécution : 
-
-```nodejs
-npm run wdio:viderRapports
-```
-Permet de supprimer les fichiers logs & les rapports précédents
+Deux commandes sont utilisees concernant le rapport d'execution : 
 
 ```nodejs
 npm run wdio:genererRapport
 ```
-Permet de générer un rapport HTML à partir des fichiers json créés automatiquement au fil de l'exécution
-## Astuces
-
-Quelques astuces utiles pour le developpement des tests automatiques : 
-
-### Les extensions VS Code utiles (quasi indispensables)
-
-- indent-rainbow
-- Gherkin Beautifier
-- Feature SyntaxHighlight and Snippets (Cucumber/Gherkin)
-- Cucumber (Gherkin) Full Support
--
-
-
-### Saisie predictive
-
-#### Sur VS Code :
-
-- Acceder a Fichier -> Preferences -> Parametres
-- Dans la recherche, taper "quick suggestions"
-- Cliquer sur "Modifer dans settings.json"
-- Coller :
-```nodejs
-{
-    "cucumberautocomplete.customParameters": [],
-    // Settings ajoutés pour avoir le mapping entre les Steps et les Features (AutoComplete)
-    "cucumberautocomplete.steps": [
-        "src/steps/**/**/*.js"
-    ],
-    "cucumberautocomplete.syncfeatures": "src/features/**/*.feature",
-    "cucumberautocomplete.strictGherkinCompletion": false,
-    "cucumberautocomplete.smartSnippets": true,
-    "cucumberautocomplete.stepsInvariants": true,
-    "workbench.startupEditor": "welcomePage",
-}
-```
-
-  
-## En cas de problème
-
-Si des erreurs surviennent au moment de l'execution, il est fortement conseille d'activer les logs complets dans le fichier de configuration :
+Permet de generer un rapport HTML a partir des fichiers json crees automatiquement au fil de l'execution
 
 ```nodejs
-logLevel: 'error',
-    outputDir: ""
+npm run wdio:viderRapports
 ```
-
-### Quelques erreurs et solutions connues :
-
-```nodejs
-Blocage lors de l'execution de npm install ou npm update
-```
-
--> La commande est a effectuer en dehors du reseau La Poste, certaines dependances sont bloquees par le proxy.
-
-
-```nodejs
-> wdio: command not found
-```
-
--> Le projet a certainement mal ete installe, voir la section **Installation du projet**
-
-```nodejs
-> pattern **.feature did not match any file
-```
-
--> La valeur definie dans la variable **specs** du fichier de configuration ne correspond a aucune feature du projet.
-
-```nodejs
-> Unexpected token } in JSON at position XXX
-```
-
--> Un des fichiers json (locateurs ou urls) contient une erreur (une virgule de trop, une accolade mal fermee...)
-
-```nodejs
-> wdio: throw new Error...
-```
-
--> Une des features a exécuter contient une erreur fatale (un mot cle mal orthographie, une structure eronnee...)
-
-```nodejs
-> wdio: undefined:undefined
-```
-
--> La phrase utilisee n'est pas definie dans les step definitions
-Il est conseille d'utiliser le module de saisie predictive pour acceder aux phrases definies. Voir la section **Astuces**
-## Contributeurs
-
-- **Rémi Leclercq**
-- **Gauthier Vuibout**
-  
+Permet de supprimer les fichiers logs & les rapports precedents
