@@ -46,4 +46,4 @@ Permet de generer un rapport HTML a partir des fichiers json crees automatiqueme
 ```nodejs
 npm run wdio:viderRapports
 ```
-Permet de supprimer les fichiers logs & les rapports precedents
+Permet de supprimer les fichiers logs et les rapports precedents
