@@ -1,0 +1,20 @@
+{
+    "PAGE": "locateur MAPPING - COMMUN - HARDIS",
+
+    "Nous rejoindre": "[href='/nous-rejoindre/accueil']",
+    "Contact": "[href='https://www.hardis-group.com/societe/contact']",
+    "Societe":"#edit-submitted-company",
+    "Nom":"#edit-submitted-last-name",
+    "Prenom":"#edit-submitted-first-name",
+    "Fonction":"#edit-submitted-title",
+    "AdresseMail":"#edit-submitted-email",
+    "Pays":"#edit_submitted_country_code_chosen",
+    "Telephone":"#edit-submitted-phone", 
+    "Code postal":"#edit-submitted-zip",
+    "Description":"#edit-submitted-description",
+    "Submit":"button[value='Envoyer']",
+    "Donnees":"#edit-submitted-mention-legale-1",
+    "Objet":"#edit-submitted-00n0y00000ryurz",
+    "Raison":"#edit-submitted-00n0y00000ryhj4"
+
+}

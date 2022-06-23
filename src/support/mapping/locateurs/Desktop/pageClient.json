@@ -1,0 +1,12 @@
+{
+    "PAGE": "locateur MAPPING - COMMUN - CONNECTION",
+
+    "login": "[href='/login']",
+    "broken_images": "[href='/broken_images']",
+    "key_presses": "[href='/key_presses']",
+    "checkboxes": "[href='/checkboxes']",
+    "username": "#username",
+    "password": "#password",
+    "boutton submit": "#login > button"
+
+}
