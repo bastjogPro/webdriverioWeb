@@ -1,4 +1,3 @@
-import getLocateur from '../../mapping/fonctions/locateurs'
 import attendreSecondes from '../navigation/attendreSecondes';
 /**
  * verifier que la page contient le texte attendu

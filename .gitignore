@@ -6,11 +6,4 @@ coverage
 .vscode
 !.vscode/extensions.json
 reporting/rapports/
-src/fichiers/jdd/
-src/fichiers/webA/aVerifier/
-src/fichiers/webA/resultats/
-src/fichiers/hausseTarifaire/2022/resultats/
-src/fichiers/preuves/
-src/fichiers/pmus/resultats/
 package-lock.json
-src/fichiers/reclamation/

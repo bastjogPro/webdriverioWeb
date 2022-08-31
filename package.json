@@ -5,9 +5,7 @@
   "scripts": {
     "Execution": "---------------------------------------------------------------------------------------------",
     "wdio:Desktop": "wdio wdio.conf.desktop.js",
-    "wdio:Mobile": "wdio wdio.conf.mobile.js",
     "wdio:Desktop_MAC": "wdio wdio.conf.desktop.js",
-    "wdio:Mobile_MAC": "wdio wdio.conf.mobile.js",
     "Reporting": "---------------------------------------------------------------------------------------------",
     "wdio:genererRapport": "node reporting/config/html-reporter.js",
     "wdio:viderRapports": "rmdir /S /Q reporting\\\\rapports && mkdir reporting\\\\rapports  && mkdir reporting\\\\rapports\\\\screenshots && rmdir /S /Q logs && mkdir logs",

@@ -1,7 +1,5 @@
-import accederPage from '../../commun/navigation/accederPage'
 import saisirTexte from '../../commun/action/saisirTexte';
 import cliquerSur from '../../commun/action/cliquerSur';
-import verifierUrlPage from '../../commun/verification/verifierUrlPage'
 import attendreSecondes from '../../commun/navigation/attendreSecondes';
 /**
  * Authentification a un compte PART
@@ -22,8 +20,5 @@ export default async (adresseMail, motDePasse) => {
     await cliquerSur("boutton submit")
 
     await attendreSecondes(3)
-
-    //Clic sur J'accepte si bandeau visible
-    //await cliquerSurSiBesoin("Accepter Cookies - Structure Page")
     
 }
